@@ -1,0 +1,133 @@
+import type {
+  Activity,
+  Health,
+  Priority,
+  Project,
+  Status,
+  Provider,
+} from "@/types"
+
+export const activities: Activity[] = [
+  {
+    title: "Validar estabilidade do WebSocket",
+    project: "Workshop Automation",
+    provider: "Mobato",
+    owner: "Victor Fazekas",
+    initials: "VF",
+    priority: "Alta",
+    status: "Em andamento",
+    due: "Hoje",
+  },
+  {
+    title: "Atualizar documentação da API",
+    project: "Repair Order Hub",
+    provider: "Mobato",
+    owner: "João Silva",
+    initials: "JS",
+    priority: "Média",
+    status: "Em andamento",
+    due: "Amanhã",
+  },
+  {
+    title: "Validar ambiente Linx",
+    project: "DMS",
+    provider: "Linx",
+    owner: "Victor Fazekas",
+    initials: "VF",
+    priority: "Alta",
+    status: "Bloqueada",
+    due: "18/09/2026",
+  },
+  {
+    title: "Revisar requisitos OSB",
+    project: "Online Service Booking",
+    provider: "Dealernet",
+    owner: "Maria Souza",
+    initials: "MS",
+    priority: "Média",
+    status: "A fazer",
+    due: "20/09/2026",
+  },
+  {
+    title: "Mapear fluxo de cancelamento",
+    project: "After Sales Portal",
+    provider: "Mobato",
+    owner: "João Silva",
+    initials: "JS",
+    priority: "Baixa",
+    status: "Concluída",
+    due: "15/09/2026",
+  },
+]
+
+export const projects: Project[] = [
+  {
+    name: "Workshop Automation",
+    provider: "Mobato",
+    health: "Amarelo",
+    due: "30/09/2026",
+    progress: 64,
+    priority: "Alta",
+    members: 3,
+  },
+  {
+    name: "Repair Order Hub",
+    provider: "Mobato",
+    health: "Verde",
+    due: "15/10/2026",
+    progress: 78,
+    priority: "Alta",
+    members: 4,
+  },
+  {
+    name: "Online Service Booking",
+    provider: "Dealernet",
+    health: "Vermelho",
+    due: "25/09/2026",
+    progress: 41,
+    priority: "Crítica",
+    members: 2,
+  },
+  {
+    name: "After Sales Portal",
+    provider: "Mobato",
+    health: "Verde",
+    due: "20/10/2026",
+    progress: 52,
+    priority: "Alta",
+    members: 2,
+  },
+]
+
+export const providers: Provider[] = [
+  {
+    name: "Mobato",
+    projects: 3,
+    contacts: 4,
+    color: "bg-blue-600",
+  },
+  {
+    name: "Dealernet",
+    projects: 2,
+    contacts: 3,
+    color: "bg-violet-600",
+  },
+  {
+    name: "Atria",
+    projects: 1,
+    contacts: 2,
+    color: "bg-emerald-600",
+  },
+  {
+    name: "Linx",
+    projects: 1,
+    contacts: 2,
+    color: "bg-amber-600",
+  },
+  {
+    name: "NBS",
+    projects: 1,
+    contacts: 2,
+    color: "bg-rose-600",
+  },
+]
