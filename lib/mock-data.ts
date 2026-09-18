@@ -1,11 +1,4 @@
-import type {
-  Activity,
-  Health,
-  Priority,
-  Project,
-  Status,
-  Provider,
-} from "@/types"
+import type { Activity, Project } from "@/types";
 
 export const activities: Activity[] = [
   {
@@ -58,7 +51,7 @@ export const activities: Activity[] = [
     status: "Concluída",
     due: "15/09/2026",
   },
-]
+];
 
 export const projects: Project[] = [
   {
@@ -97,37 +90,4 @@ export const projects: Project[] = [
     priority: "Alta",
     members: 2,
   },
-]
-
-export const providers: Provider[] = [
-  {
-    name: "Mobato",
-    projects: 3,
-    contacts: 4,
-    color: "bg-blue-600",
-  },
-  {
-    name: "Dealernet",
-    projects: 2,
-    contacts: 3,
-    color: "bg-violet-600",
-  },
-  {
-    name: "Atria",
-    projects: 1,
-    contacts: 2,
-    color: "bg-emerald-600",
-  },
-  {
-    name: "Linx",
-    projects: 1,
-    contacts: 2,
-    color: "bg-amber-600",
-  },
-  {
-    name: "NBS",
-    projects: 1,
-    contacts: 2,
-    color: "bg-rose-600",
-  },
-]
+];
