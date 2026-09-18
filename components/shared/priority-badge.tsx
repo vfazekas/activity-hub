@@ -8,9 +8,9 @@ export function PriorityBadge({
   value,
 }: PriorityBadgeProps) {
   const className =
-    value === "Crítica" || value === "Alta"
+    value === "CRITICAL" || value === "HIGH"
       ? "text-red-500"
-      : value === "Média"
+      : value === "MEDIUM"
         ? "text-amber-500"
         : "text-muted-foreground"
 

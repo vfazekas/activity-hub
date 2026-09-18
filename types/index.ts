@@ -1,42 +1,59 @@
 export type Status =
-  | "A fazer"
-  | "Em andamento"
-  | "Bloqueada"
-  | "Concluída"
-  | "Cancelada"
+  | "TODO"
+  | "IN_PROGRESS"
+  | "BLOCKED"
+  | "COMPLETED"
+  | "CANCELLED";
 
 export type Priority =
-  | "Baixa"
-  | "Média"
-  | "Alta"
-  | "Crítica"
+  | "LOW"
+  | "MEDIUM"
+  | "HIGH"
+  | "CRITICAL";
 
 export type Health =
-  | "Verde"
-  | "Amarelo"
-  | "Vermelho"
+  | "GREEN"
+  | "YELLOW"
+  | "RED";
+
+export type UserRole =
+  | "ADMIN"
+  | "USER";
+
+export type ProjectStatus = Status;
+
+export type ProjectMemberRole =
+  | "OWNER"
+  | "MEMBER"
+  | "VIEWER";
 
 export type Activity = {
-  title: string
-  project: string
-  provider: string
-  owner: string
-  initials: string
-  priority: Priority
-  status: Status
-  due: string
-}
+  title: string;
+  project: string;
+  provider: string;
+  owner: string;
+  initials: string;
+  priority: Priority;
+  status: Status;
+  due: string;
+};
 
 export type Project = {
-  name: string
-  provider: string
-  health: Health
-  due: string
-  progress: number
-  priority: Priority
-  members: number
-}
-
+  id: string;
+  providerId: string;
+  name: string;
+  description: string | null;
+  status: ProjectStatus;
+  health: Health;
+  priority: Priority;
+  startDate: string | null;
+  targetDate: string | null;
+  provider: {
+    id: string;
+    name: string;
+  } | null;
+  members: number;
+};
 
 
 

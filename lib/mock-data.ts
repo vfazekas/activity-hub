@@ -7,8 +7,8 @@ export const activities: Activity[] = [
     provider: "Mobato",
     owner: "Victor Fazekas",
     initials: "VF",
-    priority: "Alta",
-    status: "Em andamento",
+    priority: "HIGH",
+    status: "IN_PROGRESS",
     due: "Hoje",
   },
   {
@@ -17,8 +17,8 @@ export const activities: Activity[] = [
     provider: "Mobato",
     owner: "João Silva",
     initials: "JS",
-    priority: "Média",
-    status: "Em andamento",
+    priority: "MEDIUM",
+    status: "IN_PROGRESS",
     due: "Amanhã",
   },
   {

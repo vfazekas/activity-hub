@@ -8,19 +8,19 @@ export function StatusBadge({
   value,
 }: StatusBadgeProps) {
   const styles: Record<Status, string> = {
-    "A fazer":
+    "TODO":
       "bg-muted text-muted-foreground",
 
-    "Em andamento":
+    "IN_PROGRESS":
       "bg-blue-500/10 text-blue-600 dark:text-blue-400",
 
-    Bloqueada:
+    "BLOCKED":
       "bg-red-500/10 text-red-600 dark:text-red-400",
 
-    Concluída:
+    "COMPLETED":
       "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
 
-    Cancelada:
+    "CANCELLED":
       "bg-muted text-muted-foreground line-through",
   }
 

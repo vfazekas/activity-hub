@@ -8,9 +8,9 @@ export function HealthBadge({
   value,
 }: HealthBadgeProps) {
   const colors: Record<Health, string> = {
-    Verde: "text-emerald-500",
-    Amarelo: "text-amber-500",
-    Vermelho: "text-red-500",
+    GREEN: "text-emerald-500",
+    YELLOW: "text-amber-500",
+    RED: "text-red-500",
   }
 
   return (
