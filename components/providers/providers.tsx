@@ -291,7 +291,7 @@ export function Providers({ initialProviders }: ProvidersProps) {
                 {provider.contacts === 1 ? "contato" : "contatos"}
               </span>
 
-              <HealthBadge value={provider.active ? "Verde" : "Vermelho"} />
+              <HealthBadge value={provider.active ? "GREEN" : "RED"} />
 
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>

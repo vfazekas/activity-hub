@@ -43,7 +43,7 @@ export type Activity = {
   owner: string;
   initials: string;
   priority: Priority;
-  status: Status;
+  status: StatusProject;
   due: string;
 };
 

@@ -162,7 +162,16 @@ function MyActivities() {
 function ProjectsAttention() {
 
   
-  const projects = []
+  type Health = Parameters<typeof HealthBadge>[0]["value"]
+
+  type Project = {
+    name: string
+    provider: string
+    due: string
+    health: Health
+  }
+
+  const projects: Project[] = []
 
   return (
     <section className="rounded-xl border bg-card">

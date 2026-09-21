@@ -28,7 +28,7 @@ export const activities: Activity[] = [
     owner: "Victor Fazekas",
     initials: "VF",
     priority: "HIGH",
-    status: "BLOCKED",
+    status: "ON_HOLD",
     due: "18/09/2026",
   },
   {
