@@ -45,50 +45,55 @@ type Project = {
 type ProjectsDialogProps = {
   providers: Provider[];
   project?: Project;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
   onSuccess?: () => void;
+  trigger?: React.ReactNode;
 };
 
 const statusOptions: ProjectStatus[] = [
-  "TODO",
+  "PLANNING",
   "IN_PROGRESS",
-  "BLOCKED",
+  "ON_HOLD",
   "COMPLETED",
   "CANCELLED",
 ];
 
-const healthOptions: Health[] = [
-  "GREEN",
-  "YELLOW",
-  "RED",
-];
+const healthOptions: Health[] = ["GREEN", "YELLOW", "RED"];
 
-const priorityOptions: Priority[] = [
-  "LOW",
-  "MEDIUM",
-  "HIGH",
-  "CRITICAL",
-];
+const priorityOptions: Priority[] = ["LOW", "MEDIUM", "HIGH", "CRITICAL"];
 
 export function ProjectsDialog({
   providers,
   project,
+  open: controlledOpen,
+  onOpenChange,
   onSuccess,
+  trigger,
 }: ProjectsDialogProps) {
   const isEditing = Boolean(project);
 
-  const [open, setOpen] = React.useState(false);
+  const [internalOpen, setInternalOpen] = React.useState(false);
+
+  const open = controlledOpen ?? internalOpen;
+
+  const setOpen = (value: boolean) => {
+    if (onOpenChange) {
+      onOpenChange(value);
+    } else {
+      setInternalOpen(value);
+    }
+  };
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState("");
 
   const [name, setName] = React.useState(project?.name ?? "");
-  const [providerId, setProviderId] = React.useState(
-    project?.providerId ?? "",
-  );
+  const [providerId, setProviderId] = React.useState(project?.providerId ?? "");
   const [description, setDescription] = React.useState(
     project?.description ?? "",
   );
   const [status, setStatus] = React.useState<ProjectStatus>(
-    project?.status ?? "TODO",
+    project?.status ?? "PLANNING",
   );
   const [health, setHealth] = React.useState<Health>(
     project?.health ?? "GREEN",
@@ -96,12 +101,8 @@ export function ProjectsDialog({
   const [priority, setPriority] = React.useState<Priority>(
     project?.priority ?? "MEDIUM",
   );
-  const [startDate, setStartDate] = React.useState(
-    project?.startDate ?? "",
-  );
-  const [targetDate, setTargetDate] = React.useState(
-    project?.targetDate ?? "",
-  );
+  const [startDate, setStartDate] = React.useState(project?.startDate ?? "");
+  const [targetDate, setTargetDate] = React.useState(project?.targetDate ?? "");
 
   React.useEffect(() => {
     if (!open) return;
@@ -109,7 +110,7 @@ export function ProjectsDialog({
     setName(project?.name ?? "");
     setProviderId(project?.providerId ?? "");
     setDescription(project?.description ?? "");
-    setStatus(project?.status ?? "TODO");
+    setStatus(project?.status ?? "PLANNING");
     setHealth(project?.health ?? "GREEN");
     setPriority(project?.priority ?? "MEDIUM");
     setStartDate(project?.startDate ?? "");
@@ -117,9 +118,7 @@ export function ProjectsDialog({
     setError("");
   }, [open, project]);
 
-  async function handleSubmit(
-    event: React.FormEvent<HTMLFormElement>,
-  ) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     if (!name.trim()) {
@@ -148,9 +147,7 @@ export function ProjectsDialog({
       };
 
       const response = await fetch(
-        isEditing
-          ? `/api/projects/${project?.id}`
-          : "/api/projects",
+        isEditing ? `/api/projects/${project?.id}` : "/api/projects",
         {
           method: isEditing ? "PATCH" : "POST",
           headers: {
@@ -163,9 +160,7 @@ export function ProjectsDialog({
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(
-          data?.error || "Unable to save project.",
-        );
+        throw new Error(data?.error || "Unable to save project.");
       }
 
       setOpen(false);
@@ -185,10 +180,12 @@ export function ProjectsDialog({
     <Dialog open={open} onOpenChange={setOpen}>
       {!isEditing && (
         <DialogTrigger asChild>
-          <Button>
-            <Plus className="mr-2 size-4" />
-            New Project
-          </Button>
+          {trigger ?? (
+            <Button>
+              <Plus className="mr-2 size-4" />
+              New Project
+            </Button>
+          )}
         </DialogTrigger>
       )}
 
@@ -208,24 +205,18 @@ export function ProjectsDialog({
         <form onSubmit={handleSubmit} className="space-y-5">
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="space-y-2 sm:col-span-2">
-              <label className="text-sm font-medium">
-                Project Name
-              </label>
+              <label className="text-sm font-medium">Project Name</label>
 
               <Input
                 value={name}
-                onChange={(event) =>
-                  setName(event.target.value)
-                }
+                onChange={(event) => setName(event.target.value)}
                 placeholder="e.g. Repair Order Hub"
                 disabled={loading}
               />
             </div>
 
             <div className="space-y-2 sm:col-span-2">
-              <label className="text-sm font-medium">
-                Provider
-              </label>
+              <label className="text-sm font-medium">Provider</label>
 
               <Select
                 value={providerId}
@@ -238,10 +229,7 @@ export function ProjectsDialog({
 
                 <SelectContent>
                   {providers.map((provider) => (
-                    <SelectItem
-                      key={provider.id}
-                      value={provider.id}
-                    >
+                    <SelectItem key={provider.id} value={provider.id}>
                       {provider.name}
                     </SelectItem>
                   ))}
@@ -250,15 +238,11 @@ export function ProjectsDialog({
             </div>
 
             <div className="space-y-2 sm:col-span-2">
-              <label className="text-sm font-medium">
-                Description
-              </label>
+              <label className="text-sm font-medium">Description</label>
 
               <Textarea
                 value={description}
-                onChange={(event) =>
-                  setDescription(event.target.value)
-                }
+                onChange={(event) => setDescription(event.target.value)}
                 placeholder="Project description..."
                 className="min-h-[90px]"
                 disabled={loading}
@@ -266,15 +250,11 @@ export function ProjectsDialog({
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium">
-                Status
-              </label>
+              <label className="text-sm font-medium">Status</label>
 
               <Select
                 value={status}
-                onValueChange={(value) =>
-                  setStatus(value as ProjectStatus)
-                }
+                onValueChange={(value) => setStatus(value as ProjectStatus)}
                 disabled={loading}
               >
                 <SelectTrigger>
@@ -283,10 +263,7 @@ export function ProjectsDialog({
 
                 <SelectContent>
                   {statusOptions.map((option) => (
-                    <SelectItem
-                      key={option}
-                      value={option}
-                    >
+                    <SelectItem key={option} value={option}>
                       {option}
                     </SelectItem>
                   ))}
@@ -295,15 +272,11 @@ export function ProjectsDialog({
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium">
-                Health
-              </label>
+              <label className="text-sm font-medium">Health</label>
 
               <Select
                 value={health}
-                onValueChange={(value) =>
-                  setHealth(value as Health)
-                }
+                onValueChange={(value) => setHealth(value as Health)}
                 disabled={loading}
               >
                 <SelectTrigger>
@@ -312,10 +285,7 @@ export function ProjectsDialog({
 
                 <SelectContent>
                   {healthOptions.map((option) => (
-                    <SelectItem
-                      key={option}
-                      value={option}
-                    >
+                    <SelectItem key={option} value={option}>
                       {option}
                     </SelectItem>
                   ))}
@@ -324,15 +294,11 @@ export function ProjectsDialog({
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium">
-                Priority
-              </label>
+              <label className="text-sm font-medium">Priority</label>
 
               <Select
                 value={priority}
-                onValueChange={(value) =>
-                  setPriority(value as Priority)
-                }
+                onValueChange={(value) => setPriority(value as Priority)}
                 disabled={loading}
               >
                 <SelectTrigger>
@@ -341,10 +307,7 @@ export function ProjectsDialog({
 
                 <SelectContent>
                   {priorityOptions.map((option) => (
-                    <SelectItem
-                      key={option}
-                      value={option}
-                    >
+                    <SelectItem key={option} value={option}>
                       {option}
                     </SelectItem>
                   ))}
@@ -353,31 +316,23 @@ export function ProjectsDialog({
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium">
-                Start Date
-              </label>
+              <label className="text-sm font-medium">Start Date</label>
 
               <Input
                 type="date"
                 value={startDate}
-                onChange={(event) =>
-                  setStartDate(event.target.value)
-                }
+                onChange={(event) => setStartDate(event.target.value)}
                 disabled={loading}
               />
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium">
-                Target Date
-              </label>
+              <label className="text-sm font-medium">Target Date</label>
 
               <Input
                 type="date"
                 value={targetDate}
-                onChange={(event) =>
-                  setTargetDate(event.target.value)
-                }
+                onChange={(event) => setTargetDate(event.target.value)}
                 disabled={loading}
               />
             </div>
@@ -400,9 +355,7 @@ export function ProjectsDialog({
             </Button>
 
             <Button type="submit" disabled={loading}>
-              {loading && (
-                <Loader2 className="mr-2 size-4 animate-spin" />
-              )}
+              {loading && <Loader2 className="mr-2 size-4 animate-spin" />}
 
               {isEditing ? "Save Changes" : "Create Project"}
             </Button>

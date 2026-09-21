@@ -35,6 +35,7 @@ import {
 } from "@/components/ui/table";
 import { features, type DataTableFeatures } from "./data-table-features";
 import type { ProjectTableRow } from "./columns";
+import { useRouter } from "next/navigation";
 interface DataTableProps<TData extends RowData & ProjectTableRow> {
   columns: ColumnDef<DataTableFeatures, TData>[];
   data: TData[];
@@ -48,7 +49,8 @@ export function DataTable<TData extends RowData & ProjectTableRow>({
     [],
   );
 
-  //console.log(data)
+  const router = useRouter();
+
   const [columnVisibility, setColumnVisibility] =
     React.useState<ColumnVisibilityState>({});
   const table = useTable({
@@ -235,7 +237,13 @@ export function DataTable<TData extends RowData & ProjectTableRow>({
               table.getRowModel().rows.map((row) => (
                 <TableRow key={row.id}>
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell
+                      key={cell.id}
+                      className="cursor-pointer"
+                      onClick={() => {
+                        router.push(`/dashboard/projects/${row.original.id}`);
+                      }}
+                    >
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext(),

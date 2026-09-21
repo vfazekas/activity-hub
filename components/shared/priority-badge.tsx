@@ -9,14 +9,14 @@ export function PriorityBadge({
 }: PriorityBadgeProps) {
   const className =
     value === "CRITICAL" || value === "HIGH"
-      ? "text-red-500"
+      ? "bg-red-400/10 text-red-500 dark:text-red-400"
       : value === "MEDIUM"
-        ? "text-amber-500"
-        : "text-muted-foreground"
+        ? "bg-amber-400/10 text-amber-500 dark:text-amber-400"
+        : "bg-muted text-muted-foreground"
 
   return (
     <span
-      className={`text-xs font-medium ${className}`}
+      className={`text-xs rounded-md px-2 py-1 font-medium ${className}`}
     >
       {value}
     </span>

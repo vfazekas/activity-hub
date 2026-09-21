@@ -12,9 +12,10 @@ import { PageHeader } from "@/components/shared/page-header"
 import { ActivityTable } from "@/components/activities/activity-table"
 import { HealthBadge } from "@/components/shared/health-badge"
 
-import { activities, projects } from "@/lib/mock-data"
+import { activities } from "@/lib/mock-data"
 
 export function Dashboard() {
+
   return (
     <>
       <PageHeader
@@ -159,6 +160,10 @@ function MyActivities() {
 /* -------------------------------------------------------------------------- */
 
 function ProjectsAttention() {
+
+  
+  const projects = []
+
   return (
     <section className="rounded-xl border bg-card">
       <div className="flex items-center justify-between border-b px-5 py-4">
@@ -176,6 +181,7 @@ function ProjectsAttention() {
           Ver todos
         </button>
       </div>
+
 
       <div className="divide-y">
         {projects.slice(0, 3).map((project) => (

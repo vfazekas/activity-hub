@@ -1,20 +1,20 @@
-import type { Status } from "@/types"
+import type { StatusProject } from "@/types"
 
 type StatusBadgeProps = {
-  value: Status
+  value: StatusProject
 }
 
 export function StatusBadge({
   value,
 }: StatusBadgeProps) {
-  const styles: Record<Status, string> = {
-    "TODO":
+  const styles: Record<StatusProject, string> = {
+    "PLANNING":
       "bg-muted text-muted-foreground",
 
     "IN_PROGRESS":
       "bg-blue-500/10 text-blue-600 dark:text-blue-400",
 
-    "BLOCKED":
+    "ON_HOLD":
       "bg-red-500/10 text-red-600 dark:text-red-400",
 
     "COMPLETED":

@@ -20,7 +20,16 @@ export type UserRole =
   | "ADMIN"
   | "USER";
 
-export type ProjectStatus = Status;
+export type StatusProject =
+  | "PLANNING"
+  | "IN_PROGRESS"
+  | "ON_HOLD"
+  | "COMPLETED"
+  | "CANCELLED";
+
+
+
+export type ProjectStatus = StatusProject;
 
 export type ProjectMemberRole =
   | "OWNER"

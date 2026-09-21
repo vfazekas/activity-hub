@@ -1,4 +1,4 @@
-import type { Activity, Project } from "@/types";
+import type { Activity } from "@/types";
 
 export const activities: Activity[] = [
   {
@@ -27,8 +27,8 @@ export const activities: Activity[] = [
     provider: "Linx",
     owner: "Victor Fazekas",
     initials: "VF",
-    priority: "Alta",
-    status: "Bloqueada",
+    priority: "HIGH",
+    status: "BLOCKED",
     due: "18/09/2026",
   },
   {
@@ -37,8 +37,8 @@ export const activities: Activity[] = [
     provider: "Dealernet",
     owner: "Maria Souza",
     initials: "MS",
-    priority: "Média",
-    status: "A fazer",
+    priority: "MEDIUM",
+    status: "IN_PROGRESS",
     due: "20/09/2026",
   },
   {
@@ -47,47 +47,9 @@ export const activities: Activity[] = [
     provider: "Mobato",
     owner: "João Silva",
     initials: "JS",
-    priority: "Baixa",
-    status: "Concluída",
+    priority: "CRITICAL",
+    status: "COMPLETED",
     due: "15/09/2026",
   },
 ];
 
-export const projects: Project[] = [
-  {
-    name: "Workshop Automation",
-    provider: "Mobato",
-    health: "Amarelo",
-    due: "30/09/2026",
-    progress: 64,
-    priority: "Alta",
-    members: 3,
-  },
-  {
-    name: "Repair Order Hub",
-    provider: "Mobato",
-    health: "Verde",
-    due: "15/10/2026",
-    progress: 78,
-    priority: "Alta",
-    members: 4,
-  },
-  {
-    name: "Online Service Booking",
-    provider: "Dealernet",
-    health: "Vermelho",
-    due: "25/09/2026",
-    progress: 41,
-    priority: "Crítica",
-    members: 2,
-  },
-  {
-    name: "After Sales Portal",
-    provider: "Mobato",
-    health: "Verde",
-    due: "20/10/2026",
-    progress: 52,
-    priority: "Alta",
-    members: 2,
-  },
-];

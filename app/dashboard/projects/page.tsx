@@ -1,7 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 
 import { Projects } from "@/components/projects/projects";
-import type { ProjectTableRow } from "@/components/projects/columns";
+import type { ProjectTableRow } from "@/components/projects/table/columns";
 
 export const instant = false;
 
