@@ -5,20 +5,11 @@ export type Status =
   | "COMPLETED"
   | "CANCELLED";
 
-export type Priority =
-  | "LOW"
-  | "MEDIUM"
-  | "HIGH"
-  | "CRITICAL";
+export type Priority = "LOW" | "MEDIUM" | "HIGH" | "CRITICAL";
 
-export type Health =
-  | "GREEN"
-  | "YELLOW"
-  | "RED";
+export type Health = "GREEN" | "YELLOW" | "RED";
 
-export type UserRole =
-  | "ADMIN"
-  | "USER";
+export type UserRole = "ADMIN" | "USER";
 
 export type StatusProject =
   | "PLANNING"
@@ -27,14 +18,9 @@ export type StatusProject =
   | "COMPLETED"
   | "CANCELLED";
 
-
-
 export type ProjectStatus = StatusProject;
 
-export type ProjectMemberRole =
-  | "OWNER"
-  | "MEMBER"
-  | "VIEWER";
+export type ProjectMemberRole = "OWNER" | "MEMBER" | "VIEWER";
 
 export type Activity = {
   title: string;
@@ -63,11 +49,6 @@ export type Project = {
   } | null;
   members: number;
 };
-
-
-
-
-
 
 //PROVIDERS
 
@@ -100,4 +81,22 @@ export type ProviderFromDatabase = {
   contacts?: {
     count: number;
   }[];
+};
+
+//MEMBERS
+
+export type ProjectMember = {
+  id: string;
+  userId: string;
+  name: string;
+  email: string;
+  role: "OWNER" | "MEMBER" | "VIEWER";
+};
+
+//USER
+
+export type User = {
+  id: string;
+  name: string;
+  email: string;
 };

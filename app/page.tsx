@@ -1,12 +1,16 @@
 import { AuthButton } from "@/components/auth/auth-button";
 import Footer from "@/components/footer";
 import { Hero } from "@/components/hero";
+import { createClient } from "@/lib/supabase/server";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
 
-export default function Home() {
+export const instant = false;
 
+export default async function Home() {
+  const supabase = await createClient();
+  const { data } = await supabase.auth.getClaims();
 
   return (
     <main className="min-h-screen flex flex-col items-center">
@@ -33,7 +37,7 @@ export default function Home() {
           </div>
         </nav>
         <div className="flex-1 flex flex-col gap-20 min-w-full">
-          <Hero />
+          <Hero data={data?.claims} />
         </div>
         <Footer />
       </div>

@@ -11,7 +11,15 @@ import { StatusBadge } from "@/components/shared/status-badge";
 import { HealthBadge } from "@/components/shared/health-badge";
 import { PriorityBadge } from "@/components/shared/priority-badge";
 
-import type { Health, Priority, ProjectStatus } from "@/types";
+import type {
+  Health,
+  Priority,
+  ProjectMember,
+  ProjectStatus,
+  User,
+} from "@/types";
+import { useRouter } from "next/navigation";
+import { ProjectMembers } from "./project-members";
 
 type ProjectDetailsData = {
   id: string;
@@ -27,10 +35,12 @@ type ProjectDetailsData = {
     id: string;
     name: string;
   } | null;
+  members: ProjectMember[];
 };
 
 type ProjectDetailsProps = {
   project: ProjectDetailsData;
+  users: User[];
 };
 
 function formatDate(date: string | null) {
@@ -47,8 +57,10 @@ function formatDate(date: string | null) {
   return `${day}/${month}/${year}`;
 }
 
-export function ProjectDetails({ project }: ProjectDetailsProps) {
+export function ProjectDetails({ project, users }: ProjectDetailsProps) {
   const [editOpen, setEditOpen] = React.useState(false);
+
+  const router = useRouter();
 
   const projectForDialog = {
     id: project.id,
@@ -106,7 +118,7 @@ export function ProjectDetails({ project }: ProjectDetailsProps) {
             onOpenChange={setEditOpen}
             onSuccess={() => {
               setEditOpen(false);
-              window.location.reload();
+              router.refresh();
             }}
             trigger={
               <Button>
@@ -140,11 +152,15 @@ export function ProjectDetails({ project }: ProjectDetailsProps) {
           </ProjectInfoCard>
         </div>
 
+        <ProjectMembers
+          projectId={project.id}
+          initialMembers={project.members}
+          users={users ?? []}
+        />
+
         <div className="border-t pt-8">
           <div className="flex flex-col gap-1">
-            <h2 className="text-xl font-semibold tracking-tight">
-              Tasks
-            </h2>
+            <h2 className="text-xl font-semibold tracking-tight">Tasks</h2>
 
             <p className="text-sm text-muted-foreground">
               Tasks related to this project will appear here.
@@ -168,11 +184,7 @@ type ProjectInfoCardProps = {
   children: React.ReactNode;
 };
 
-function ProjectInfoCard({
-  label,
-  icon,
-  children,
-}: ProjectInfoCardProps) {
+function ProjectInfoCard({ label, icon, children }: ProjectInfoCardProps) {
   return (
     <div className="rounded-xl border bg-card p-5">
       <div className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -180,9 +192,7 @@ function ProjectInfoCard({
         <span>{label}</span>
       </div>
 
-      <div className="mt-3 flex items-center">
-        {children}
-      </div>
+      <div className="mt-3 flex items-center">{children}</div>
     </div>
   );
 }

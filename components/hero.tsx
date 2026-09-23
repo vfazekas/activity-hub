@@ -1,4 +1,6 @@
-export function Hero() {
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+export function Hero(data: any | undefined) {
   return (
     <section className="relative flex min-h-[calc(100vh-80px)] items-center justify-center overflow-hidden px-6 py-20">
       {/* Background glow */}
@@ -22,18 +24,14 @@ export function Hero() {
         {/* Eyebrow */}
         <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-foreground/10 bg-background/60 px-4 py-2 text-sm backdrop-blur">
           <span className="h-2 w-2 rounded-full bg-green-500" />
-          <span className="text-muted-foreground">
-            Seu espaço de trabalho
-          </span>
+          <span className="text-muted-foreground">Seu espaço de trabalho</span>
         </div>
 
         {/* Main title */}
         <h1 className="max-w-4xl text-5xl font-semibold tracking-tight sm:text-6xl lg:text-7xl">
           Tudo que precisa acontecer.
           <br />
-          <span className="text-muted-foreground">
-            Em um só lugar.
-          </span>
+          <span className="text-muted-foreground">Em um só lugar.</span>
         </h1>
 
         {/* Description */}
@@ -45,10 +43,10 @@ export function Hero() {
         {/* CTA */}
         <div className="mt-10">
           <a
-            href="/auth/login"
+            href={data ? "/dashboard" : "/auth/login"}
             className="group inline-flex items-center gap-2 rounded-xl bg-foreground px-6 py-3.5 text-sm font-medium text-background transition-all hover:gap-3 hover:opacity-90"
           >
-            Acessar plataforma
+            {data ? "Ir para Dashboard" : "Acessar Plataforma"}
             <span className="transition-transform group-hover:translate-x-0.5">
               →
             </span>
