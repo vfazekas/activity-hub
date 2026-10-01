@@ -29,3 +29,24 @@ export function cn(...inputs: ClassValue[]) {
 
     return colors[index];
   }
+
+
+  export function formatDate(date: string) {
+  return new Intl.DateTimeFormat("pt-BR", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(new Date(date));
+}
+
+export function formatDueDate(value: string | null) {
+  if (!value) {
+    return "Sem prazo";
+  }
+
+  const date = new Date(`${value}T00:00:00`);
+
+  return new Intl.DateTimeFormat("pt-BR").format(date);
+}

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {
   Activity,
@@ -6,16 +6,15 @@ import {
   Clock3,
   FolderKanban,
   Plus,
-} from "lucide-react"
+} from "lucide-react";
 
-import { PageHeader } from "@/components/shared/page-header"
-import { ActivityTable } from "@/components/activities/activity-table"
-import { HealthBadge } from "@/components/shared/health-badge"
+import { PageHeader } from "@/components/shared/page-header";
+//import { ActivityTable } from "@/components/activities/table/activity-table"
+import { HealthBadge } from "@/components/shared/health-badge";
 
-import { activities } from "@/lib/mock-data"
+import { activities } from "@/lib/mock-data";
 
 export function Dashboard() {
-
   return (
     <>
       <PageHeader
@@ -39,7 +38,7 @@ export function Dashboard() {
 
       <UpcomingDeadlines />
     </>
-  )
+  );
 }
 
 /* -------------------------------------------------------------------------- */
@@ -74,18 +73,15 @@ function DashboardStats() {
       trend: "Projetos críticos",
       icon: Activity,
     },
-  ]
+  ];
 
   return (
     <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
       {stats.map((stat) => {
-        const Icon = stat.icon
+        const Icon = stat.icon;
 
         return (
-          <div
-            key={stat.label}
-            className="rounded-xl border bg-card p-5"
-          >
+          <div key={stat.label} className="rounded-xl border bg-card p-5">
             <div className="flex items-center justify-between">
               <span className="text-sm text-muted-foreground">
                 {stat.label}
@@ -109,19 +105,17 @@ function DashboardStats() {
 
               <span
                 className={`text-xs ${
-                  stat.danger
-                    ? "text-red-500"
-                    : "text-muted-foreground"
+                  stat.danger ? "text-red-500" : "text-muted-foreground"
                 }`}
               >
                 {stat.trend}
               </span>
             </div>
           </div>
-        )
+        );
       })}
     </div>
-  )
+  );
 }
 
 /* -------------------------------------------------------------------------- */
@@ -133,9 +127,7 @@ function MyActivities() {
     <section className="rounded-xl border bg-card">
       <div className="flex items-center justify-between border-b px-5 py-4">
         <div>
-          <h2 className="font-semibold">
-            Minhas atividades
-          </h2>
+          <h2 className="font-semibold">Minhas atividades</h2>
 
           <p className="mt-0.5 text-xs text-muted-foreground">
             Acompanhe o que precisa da sua atenção
@@ -146,13 +138,14 @@ function MyActivities() {
           Ver todas
         </button>
       </div>
-
+      {/* 
       <ActivityTable
         rows={activities.slice(0, 4)}
         compact
       />
+      */}
     </section>
-  )
+  );
 }
 
 /* -------------------------------------------------------------------------- */
@@ -160,26 +153,22 @@ function MyActivities() {
 /* -------------------------------------------------------------------------- */
 
 function ProjectsAttention() {
-
-  
-  type Health = Parameters<typeof HealthBadge>[0]["value"]
+  type Health = Parameters<typeof HealthBadge>[0]["value"];
 
   type Project = {
-    name: string
-    provider: string
-    due: string
-    health: Health
-  }
+    name: string;
+    provider: string;
+    due: string;
+    health: Health;
+  };
 
-  const projects: Project[] = []
+  const projects: Project[] = [];
 
   return (
     <section className="rounded-xl border bg-card">
       <div className="flex items-center justify-between border-b px-5 py-4">
         <div>
-          <h2 className="font-semibold">
-            Projetos em atenção
-          </h2>
+          <h2 className="font-semibold">Projetos em atenção</h2>
 
           <p className="mt-0.5 text-xs text-muted-foreground">
             Health dos seus projetos
@@ -191,21 +180,15 @@ function ProjectsAttention() {
         </button>
       </div>
 
-
       <div className="divide-y">
         {projects.slice(0, 3).map((project) => (
-          <div
-            key={project.name}
-            className="flex items-center gap-3 px-5 py-4"
-          >
+          <div key={project.name} className="flex items-center gap-3 px-5 py-4">
             <div className="flex size-9 items-center justify-center rounded-lg bg-muted">
               <FolderKanban className="size-4 text-muted-foreground" />
             </div>
 
             <div className="min-w-0 flex-1">
-              <p className="truncate text-sm font-medium">
-                {project.name}
-              </p>
+              <p className="truncate text-sm font-medium">{project.name}</p>
 
               <p className="mt-0.5 text-xs text-muted-foreground">
                 {project.provider} · Prazo {project.due}
@@ -217,7 +200,7 @@ function ProjectsAttention() {
         ))}
       </div>
     </section>
-  )
+  );
 }
 
 /* -------------------------------------------------------------------------- */
@@ -228,9 +211,7 @@ function UpcomingDeadlines() {
   return (
     <section className="mt-6 rounded-xl border bg-card">
       <div className="border-b px-5 py-4">
-        <h2 className="font-semibold">
-          Próximos prazos
-        </h2>
+        <h2 className="font-semibold">Próximos prazos</h2>
 
         <p className="mt-0.5 text-xs text-muted-foreground">
           Atividades que vencem nos próximos dias
@@ -245,16 +226,12 @@ function UpcomingDeadlines() {
           >
             <div
               className={`mt-1 size-2 rounded-full ${
-                index === 0
-                  ? "bg-red-500"
-                  : "bg-amber-500"
+                index === 0 ? "bg-red-500" : "bg-amber-500"
               }`}
             />
 
             <div>
-              <p className="text-sm font-medium">
-                {activity.title}
-              </p>
+              <p className="text-sm font-medium">{activity.title}</p>
 
               <p className="mt-1 text-xs text-muted-foreground">
                 {activity.project}
@@ -268,5 +245,5 @@ function UpcomingDeadlines() {
         ))}
       </div>
     </section>
-  )
+  );
 }

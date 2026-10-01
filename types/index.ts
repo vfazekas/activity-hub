@@ -100,3 +100,45 @@ export type User = {
   name: string;
   email: string;
 };
+
+
+//TASKS
+
+export type Task = {
+  id: string;
+  projectId: string;
+  title: string;
+  description: string | null;
+  status: Status;
+  priority: Priority;
+  assignedTo: string | null;
+  createdBy: string;
+  dueDate: string | null;
+  completedAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type TaskAssignee = {
+  id: string;
+  name: string;
+  email: string;
+};
+
+export type TaskTableRow = {
+  id: string;
+  projectId: string;
+  projectName: string | null;
+  providerName: string | null;
+  title: string;
+  description: string | null;
+  status: Status;
+  priority: Priority;
+  assignedTo: string | null;
+  assignedToName: string | null;
+  assignedToEmail: string | null;
+  dueDate: string | null;
+  completedAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
